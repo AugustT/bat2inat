@@ -21,15 +21,18 @@ send_observation <- function(file){
                         md$settings),
     latitude = md$lat, 
     longitude = md$long,
-    # local_photos = png,
-    access_token = token
+    photos = png,
+    sounds = file,
+    access_token = token,
+    observation_fields = list('567' = paste(md$model, md$firmware), #model
+                              '4936' = md$sampling/1000) #sampling rate (kHz)
   )
-  
-  pic_response <- pynat$add_photo_to_observation(
-    response[[1]][['id']],
-    png,
-    access_token = token
-  )
+
+  # pic_response <- pynat$add_photo_to_observation(
+  #   response[[1]][['id']],
+  #   png,
+  #   access_token = token
+  # )
   
   return(response[[1]][['id']])
   

@@ -20,6 +20,7 @@ call_metadata <- function(file){
        model = md$Model, 
        firmware = md$`Firmware Version`,
        settings = md$`WA|Song Meter|Audio settings`,
+       sampling = md$Samplerate, 
        date = formatted_date)
   
 }
