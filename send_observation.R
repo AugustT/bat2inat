@@ -8,7 +8,7 @@ send_observation <- function(file){
   
   # filter calls
   TD <- filter_calls(file)
-  browseURL(dirname(TD$filtered_calls_image))
+  # browseURL(dirname(TD$filtered_calls_image))
   
   # load token
   load("C:/Users/t_a_a/OneDrive - NERC/bat2inat/token.rdata")

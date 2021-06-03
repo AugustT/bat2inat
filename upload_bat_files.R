@@ -7,13 +7,11 @@ library(reticulate)
 
 pynat <- import('pyinaturalist')
 
-files <- file <- 'data/BARBAR_20210526_221302.wav'
+# files <- file <- 'data/BARBAR_20210526_221302.wav'
 
-# files <- list.files(path = choose.dir(getwd()),
-#                     pattern = '.wav',
-#                     recursive = T,
-#                     full.names = T)
-
-# filter_calls(file)
+files <- list.files(path = choose.dir(getwd()),
+                    pattern = '.wav',
+                    recursive = T,
+                    full.names = T)
 
 pbapply::pblapply(X = files, FUN = send_observation)
