@@ -42,7 +42,7 @@ library(reticulate)
 py_install("pyinaturalist==0.14.0dev374", pip = TRUE)
 ```
 
-6) Test out a file upload. If this works you should see a new observation appear in your iNaturalist account
+6) Test out a simple upload. If this works you should see a new observation appear in your iNaturalist account
 
 ```r
 load('token.rdata')
@@ -66,4 +66,55 @@ pynat$create_observation(
   positional_accuracy = 10,
   access_token = token
 )
+```
+
+6) Upload and bat call file
+
+This will upload one of the call files shipped with the code. If it works you will see a new record in your iNaturalist account, dont forget to delete it.
+
+```r
+# Load in the R functions
+for(file in list.files('functions', full.names = T)) source(file)
+library(reticulate)
+
+# Import the uploader
+pynat <- import('pyinaturalist')
+
+# Choose the file to upload
+file <- 'data/BARBAR_20210526_221302.wav'
+
+# load your token
+load('token.rdata')
+
+# Upload the observation
+send_observation(file = file, 
+                 post = TRUE, 
+                 token = token)
+```
+
+7) Batch upload call files
+
+You can point R to a director and get it to list all the wav files in that folder, and all sub folders. This is a quick way to use this to upload all your call files in a folder.  If it works you will see a batch of new records in your iNaturalist account, dont forget to delete them.
+
+```r
+# Load in the R functions
+for(file in list.files('functions', full.names = T)) source(file)
+library(reticulate)
+
+# Import the uploader
+pynat <- import('pyinaturalist')
+
+# Choose the files to upload
+files <- list.files(path = 'data',
+                    pattern = '.wav',
+                    recursive = T,
+                    full.names = T)
+                    
+# load your token
+load('token.rdata')
+
+# Upload the observations
+ids <- lapply(X = files,
+              FUN = send_observation,
+              token = token)
 ```
