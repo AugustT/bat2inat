@@ -8,6 +8,8 @@
 
 There are a few things you will need to sort out before we can start uploading files.
 
+0) Clone this repository into your RStudio. Go File > New Project > Version Control > Git > Under repository URL put 'https://github.com/AugustT/bat2inat'
+
 1) Create an app on iNat here: https://www.inaturalist.org/oauth/applications/new, make not of the application ID and application secret.
 
 2) Save out your id, secret, username and password to an object and don't share it with others. Add it to your `.gitignore` if you are using git.
