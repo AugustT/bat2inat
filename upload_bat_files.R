@@ -1,8 +1,4 @@
-source('species_table.R')
-source('call_metadata.R')
-source('write_spectro.R')
-source('send_observation.R')
-source('filter_calls.R')
+for(file in list.files('functions', full.names = T)) source(file)
 library(reticulate)
 
 pynat <- import('pyinaturalist')
