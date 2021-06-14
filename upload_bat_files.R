@@ -7,12 +7,12 @@ library(reticulate)
 
 pynat <- import('pyinaturalist')
 
-files <- file <- 'data/BARBAR_20210526_221302.wav'
+# files <- file <- 'data/BARBAR_20210526_221302.wav'
 
-# files <- list.files(path = 'data',
-#                     pattern = '.wav',
-#                     recursive = T,
-#                     full.names = T)
+files <- list.files(path = choose.dir(default = getwd()),
+                    pattern = '.wav',
+                    recursive = T,
+                    full.names = T)
 
 # ids <- lapply(X = files,
 #               FUN = send_observation,
