@@ -24,8 +24,8 @@ token <- pynat$get_access_token(token[[1]],
 
 # Submit an observation
 response <- pynat$create_observation(
-  species_guess = 'chiroptera',
-  observed_on_string = '2021/05/02',
+  species_guess = 'cheetah',
+  observed_on = '2021-05-02 11:23',
   description='This is a bat auto upload',
   latitude = 51.599840854449226, 
   longitude = -1.130838820690541,

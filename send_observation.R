@@ -23,7 +23,7 @@ send_observation <- function(file, post = TRUE, verbose = TRUE){
     
     response <- pynat$create_observation(
       species_guess = md$sp,
-      observed_on_string = as.Date(md$date, format = '%Y/%m/%d'),
+      observed_on = paste(md$date, md$time),
       description = paste('Recorded on', md$model, md$firmware, '\n',
                           'Number of calls in sequence:', length(TD$freq_peak), '\n',
                           'Peak frequencies (kHz):', paste(round(TD$freq_peak/1000), collapse = ', '), '\n',
