@@ -19,17 +19,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 There are a few things you will need to sort out before we can start uploading files.
 
-1) Install python: https://www.python.org/downloads/
+1) Create an app on iNat here: https://www.inaturalist.org/oauth/applications/new, make not of the application ID and application secret.
 
-Check that by running this line it R, it should return the path where pythin is installed. If it doesn't try restarting your computer.
-
-```r
-Sys.which("python") 
-```
-
-2) Create an app on iNat here: https://www.inaturalist.org/oauth/applications/new, make not of the application ID and application secret.
-
-3) Save out your id, secret, username and password to an object and don't share it with others. Add it to your `.gitignore` if you are using git.
+2) Save out your id, secret, username and password to an object and don't share it with others. Add it to your `.gitignore` if you are using git.
 
 You can do this last stage like this:
 
@@ -39,10 +31,15 @@ token <- list(username = "<YOUR_USENAME>",
               app_id = "<APPLICATION_ID>",
               app_secret = "<APPLICATION_SECRET>")
               
+token <- list(username = "tomaugust",
+              password = "Battleofthesexes1",
+              app_id = "499b6564dec9885f27b101afde9cf0fca9aab4b69a11c4e3e1ae018845e3c95f",
+              app_secret = "c833f0a2c4b63892e4c6bc4d2fde477464c9a002d46e136315accfc62088b685")
+              
 save(token, file = 'token.rdata')
 ```
 
-4) Install the R packages we will need
+3) Install the R packages we will need
 
 ```r
 list.of.packages <- c('av', 'reticulate',
@@ -51,7 +48,9 @@ new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"
 if(length(new.packages)) install.packages(new.packages)
 ```
 
-5) Install the pynaturalist package
+4) Install the pynaturalist package
+
+If you do not have python installed on your system you will be prompted to install miniconda, this is required for the uploader to work so please say 'yes'.
 
 ```r
 library(reticulate)
