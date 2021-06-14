@@ -1,4 +1,4 @@
-send_observation <- function(file, post = TRUE, verbose = TRUE){
+send_observation <- function(file, post = TRUE, verbose = TRUE, token){
   
   if(verbose) cat(paste0('#', basename(file), '#\n'))
   
@@ -15,7 +15,6 @@ send_observation <- function(file, post = TRUE, verbose = TRUE){
   # load token
   if(post){
     if(verbose) cat('Uploading observation data')
-    load("C:/Users/t_a_a/OneDrive - NERC/bat2inat/token.rdata")
     token <- pynat$get_access_token(token[[1]],
                                     token[[2]],
                                     token[[3]],

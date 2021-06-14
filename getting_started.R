@@ -7,7 +7,7 @@ library(reticulate)
 Sys.which("python") 
 
 # Install the iNat python package https://pypi.org/project/pyinaturalist/
-# py_install("pyinaturalist==0.14.0dev374", pip = TRUE)
+py_install("pyinaturalist==0.14.0dev374", pip = TRUE)
 
 # Create an app on iNat here: https://www.inaturalist.org/oauth/applications/new
 # save out id and secret to an object and dont share with others

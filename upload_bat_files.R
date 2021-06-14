@@ -18,4 +18,8 @@ files <- list.files(path = choose.dir(default = getwd()),
 #               FUN = send_observation,
 #               post = TRUE)
 
-send_observation(file = files[1], post = TRUE)
+load('token.rdata')
+
+send_observation(file = files[1], 
+                 post = TRUE, 
+                 token = token)
