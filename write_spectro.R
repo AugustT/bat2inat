@@ -1,15 +1,14 @@
-write_spectro <- function(file){
-  wav <- bioacoustics::read_audio(file)
-  
+write_spectro <- function(file, verbose = TRUE){
+
+  if(verbose) cat('Creating spectrogram')
   tf <- tempfile(fileext = '.png')
   suppressMessages({
     png(filename = tf, width = 1024, height = 1024*0.75)
-    seewave::spectro(wav,
-                     flim = c(10,100),
-                     collevels = seq(-50, 0, 10), 
-                     fastdisp = TRUE, 
-                     main = 'Spectrogram of full seqence')
+      fft_data <- av::read_audio_fft(file, window = hanning(1024), overlap = 0.5)
+      plot(fft_data,
+           main = 'Spectrogram of full sequence')
     dev.off()
   })
+  if(verbose) cat('\t\tDone\n')
   return(tf)
 }

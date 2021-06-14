@@ -9,9 +9,13 @@ pynat <- import('pyinaturalist')
 
 # files <- file <- 'data/BARBAR_20210526_221302.wav'
 
-files <- list.files(path = choose.dir(getwd()),
+files <- list.files(path = 'data',
                     pattern = '.wav',
                     recursive = T,
                     full.names = T)
 
-pbapply::pblapply(X = files, FUN = send_observation)
+# ids <- lapply(X = files,
+#               FUN = send_observation,
+#               post = TRUE)
+
+send_observation(file = files[1], post = TRUE)
