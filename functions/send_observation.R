@@ -5,11 +5,12 @@ send_observation <- function(file, post = TRUE, verbose = TRUE, token){
   # get metadata
   md <- call_metadata(file)
   
-  # create spectrogram
-  png <- write_spectro(file)
-  
   # filter calls
   TD <- filter_calls(file)
+  
+  # create spectrogram
+  png <- write_spectro(file, TD, samp_freq = md$sampling)
+  
   # browseURL(dirname(TD$filtered_calls_image))
   
   # load token
@@ -33,7 +34,7 @@ send_observation <- function(file, post = TRUE, verbose = TRUE, token){
                           md$settings),
       latitude = md$lat, 
       longitude = md$long,
-      photos = c(png, TD$filtered_calls_image),
+      photos = png,
       sounds = file,
       access_token = token,
       observation_fields = list('567' = paste(md$model, md$firmware), #model
