@@ -16,7 +16,7 @@ files <- list.files(path = "C:\\Users\\t_a_a\\OneDrive - UKCEH\\Bat audio - EM t
 
 load('token.rdata')
 
-for(i in files[44:51]){
+for(i in files[51]){
 send_observation(file = i, 
                  post = TRUE, 
                  token = token)

@@ -41,6 +41,18 @@ send_observation <- function(file, post = TRUE, verbose = TRUE, token){
       
     }
     
+    # Set up observation fields
+    of <- list('567' = paste(md$model, md$firmware), #model
+               '4936' = md$sampling/1000,
+               '12583' = md$time)
+    
+    # Add average frequency if its there
+    if(!is.null(TD$freq_peak)){
+      
+      of <- c(of, '308' = round(mean(TD$freq_peak/1000)))
+      
+    }
+    
     response <- pynat$create_observation(
       species_guess = md$sp,
       observed_on = paste(md$date, md$time),
@@ -50,9 +62,7 @@ send_observation <- function(file, post = TRUE, verbose = TRUE, token){
       photos = png,
       sounds = file,
       access_token = token,
-      observation_fields = list('567' = paste(md$model, md$firmware), #model
-                                '4936' = md$sampling/1000,
-                                '12583' = md$time) #sampling rate (kHz)
+      observation_fields = of
     )
     if(verbose) cat('\tDone\n\n')
     return(response[[1]][['id']])
