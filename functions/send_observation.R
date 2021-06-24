@@ -24,7 +24,7 @@ send_observation <- function(file, post = TRUE, verbose = TRUE, token){
     if(is.null(TD$freq_peak)){
       
       desc <- paste('Recorded on', md$model, md$firmware, '\n',
-                    'Call parameters could not automatically be extracted',
+                    'Call parameters could not automatically be extracted\n',
                     'Recorder settings\n',
                     md$settings)
       
