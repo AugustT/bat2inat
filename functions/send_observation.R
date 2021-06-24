@@ -21,17 +21,30 @@ send_observation <- function(file, post = TRUE, verbose = TRUE, token){
                                     token[[3]],
                                     token[[4]])
     
+    if(is.null(TD$freq_peak)){
+      
+      desc <- paste('Recorded on', md$model, md$firmware, '\n',
+                    'Call parameters could not automatically be extracted',
+                    'Recorder settings\n',
+                    md$settings)
+      
+    } else {
+      
+      desc <- paste('Recorded on', md$model, md$firmware, '\n',
+                    'Number of calls in sequence:', length(TD$freq_peak), '\n',
+                    'Peak frequencies (kHz):', paste(round(TD$freq_peak/1000), collapse = ', '), '\n',
+                    'Max frequencies (kHz):', paste(round(TD$freq_max/1000), collapse = ', '), '\n',
+                    'Min frequencies (kHz):', paste(round(TD$freq_min/1000), collapse = ', '), '\n',
+                    'Call durations (ms):', paste(round(TD$call_duration, digits = 1), collapse = ', '), '\n',
+                    'Recorder settings\n',
+                    md$settings)
+      
+    }
+    
     response <- pynat$create_observation(
       species_guess = md$sp,
       observed_on = paste(md$date, md$time),
-      description = paste('Recorded on', md$model, md$firmware, '\n',
-                          'Number of calls in sequence:', length(TD$freq_peak), '\n',
-                          'Peak frequencies (kHz):', paste(round(TD$freq_peak/1000), collapse = ', '), '\n',
-                          'Max frequencies (kHz):', paste(round(TD$freq_max/1000), collapse = ', '), '\n',
-                          'Min frequencies (kHz):', paste(round(TD$freq_min/1000), collapse = ', '), '\n',
-                          'Call durations (ms):', paste(round(TD$call_duration, digits = 1), collapse = ', '), '\n',
-                          'Recorder settings\n',
-                          md$settings),
+      description = desc,
       latitude = md$lat, 
       longitude = md$long,
       photos = png,
