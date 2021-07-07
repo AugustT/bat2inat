@@ -5,11 +5,12 @@ send_observation <- function(file, post = TRUE, verbose = TRUE, token){
   # get metadata
   md <- call_metadata(file)
   
-  # create spectrogram
-  png <- write_spectro(file)
-  
   # filter calls
   TD <- filter_calls(file)
+  
+  # create spectrogram
+  png <- write_spectro(file, TD, samp_freq = md$sampling)
+  
   # browseURL(dirname(TD$filtered_calls_image))
   
   # load token
@@ -20,25 +21,48 @@ send_observation <- function(file, post = TRUE, verbose = TRUE, token){
                                     token[[3]],
                                     token[[4]])
     
+    if(is.null(TD$freq_peak)){
+      
+      desc <- paste('Recorded on', md$model, md$firmware, '\n',
+                    'Call parameters could not automatically be extracted\n',
+                    'Recorder settings\n',
+                    md$settings)
+      
+    } else {
+      
+      desc <- paste('Recorded on', md$model, md$firmware, '\n',
+                    'Number of calls in sequence:', length(TD$freq_peak), '\n',
+                    'Peak frequencies (kHz):', paste(round(TD$freq_peak/1000), collapse = ', '), '\n',
+                    'Max frequencies (kHz):', paste(round(TD$freq_max/1000), collapse = ', '), '\n',
+                    'Min frequencies (kHz):', paste(round(TD$freq_min/1000), collapse = ', '), '\n',
+                    'Call durations (ms):', paste(round(TD$call_duration, digits = 1), collapse = ', '), '\n',
+                    'Recorder settings\n',
+                    md$settings)
+      
+    }
+    
+    # Set up observation fields
+    of <- list('567' = paste(md$model, md$firmware), #model
+               '4936' = md$sampling/1000,
+               '12583' = md$time)
+    
+    # Add average frequency if its there
+    if(!is.null(TD$freq_peak)){
+      
+      of <- c(of, '308' = round(mean(TD$freq_peak/1000)))
+      
+    }
+    
     response <- pynat$create_observation(
       species_guess = md$sp,
       observed_on = paste(md$date, md$time),
-      description = paste('Recorded on', md$model, md$firmware, '\n',
-                          'Number of calls in sequence:', length(TD$freq_peak), '\n',
-                          'Peak frequencies (kHz):', paste(round(TD$freq_peak/1000), collapse = ', '), '\n',
-                          'Max frequencies (kHz):', paste(round(TD$freq_max/1000), collapse = ', '), '\n',
-                          'Min frequencies (kHz):', paste(round(TD$freq_min/1000), collapse = ', '), '\n',
-                          'Call durations (ms):', paste(round(TD$call_duration, digits = 1), collapse = ', '), '\n',
-                          'Recorder settings\n',
-                          md$settings),
+      description = desc,
       latitude = md$lat, 
       longitude = md$long,
-      photos = c(png, TD$filtered_calls_image),
+      photos = png,
       sounds = file,
       access_token = token,
-      observation_fields = list('567' = paste(md$model, md$firmware), #model
-                                '4936' = md$sampling/1000,
-                                '12583' = md$time) #sampling rate (kHz)
+      observation_fields = of
     )
     if(verbose) cat('\tDone\n\n')
     return(response[[1]][['id']])
