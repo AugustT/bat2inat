@@ -2,10 +2,6 @@
 # install.packages('reticulate')
 library(reticulate)
 
-# This will tell you where your python is
-# If you dont have python you will need to install it
-Sys.which("python") 
-
 # Install the iNat python package https://pypi.org/project/pyinaturalist/
 py_install("pyinaturalist==0.14.0dev374", pip = TRUE)
 
