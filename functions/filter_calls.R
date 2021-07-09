@@ -3,7 +3,11 @@ filter_calls <- function(file, verbose = TRUE, plot = FALSE){
   if(verbose) cat('Isolating calls')
   
   # Create a temp dir for spectrograms  
-  tempD <- tempdir()
+  if(plot){
+    tempD <- tempdir()
+  } else {
+    tempD <- NULL
+  }
   
   # Delete any that are already there
   unlink(file.path(tempD, 'spectrograms'), recursive = TRUE)

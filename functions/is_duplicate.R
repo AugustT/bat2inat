@@ -1,15 +1,18 @@
 # md - metadata returned from call_metadata
 # radius - in meters, in which a record is considered a duplicate
 
-is_duplicate <- function(md, radius = 10, username){
+is_duplicate <- function(md, radius = 10, username, verbose = TRUE){
+  
+  if(verbose) cat('Searching for duplicates')
   
   # get proper name
-  q <- pynat$search(q = md$sp, sources = 'taxa')
+  q <- pynat$search(q = md$sp, sources = 'taxa', per_page = 1)
   
   if(q$total_results == 0){
     
     warning(paste0('Name ', '"', md$sp, '"', ' cannot be matched to a species name on iNaturalist'))
     return(FALSE)
+    if(verbose) cat('\tDone\n')
     
   }
   
@@ -25,6 +28,16 @@ is_duplicate <- function(md, radius = 10, username){
   dupe <- ifelse(test = rtn$total_results > 0,
                  yes = TRUE,
                  no = FALSE)
+  
+  if(verbose){
+    
+    if(dupe){
+      cat('\tDuplicate - skipping\n\n')
+    } else {
+      cat('\tUnique - proceeding\n')
+    }
+    
+  } 
   
   return(dupe)
   
