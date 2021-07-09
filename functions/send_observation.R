@@ -1,9 +1,21 @@
-send_observation <- function(file, post = TRUE, verbose = TRUE, token){
+send_observation <- function(file,
+                             post = TRUE,
+                             verbose = TRUE,
+                             token,
+                             post_duplicates = FALSE,
+                             radius = 10){
   
   if(verbose) cat(paste0('#', basename(file), '#\n'))
   
   # get metadata
   md <- call_metadata(file)
+  
+  ## ADD CAT STATEMENTS FOR IS_DUPLICATE AND IMPLEMENT FUNCTION
+  
+  # Check we don't have a duplicate observation already
+  dup <- is_duplicate(md = md,
+                      radius = 10,
+                      username = token$username)
   
   # filter calls
   TD <- filter_calls(file)

@@ -1,9 +1,9 @@
-for(file in list.files('functions', full.names = T)) source(file)
+for(script in list.files('functions', full.names = T)) source(script)
 library(reticulate)
 
 pynat <- import('pyinaturalist')
 
-# files <- file <- 'data/BARBAR_20210526_221302.wav'
+# files <- file <- 'data/PIPPIP_20210526_221643.wav'
 
 files <- list.files(path = "C:\\Users\\t_a_a\\OneDrive - UKCEH\\Bat audio - EM touch\\Woolley Grange - Bath - 2021",
                     pattern = '.wav',
@@ -17,7 +17,7 @@ files <- list.files(path = "C:\\Users\\t_a_a\\OneDrive - UKCEH\\Bat audio - EM t
 load('token.rdata')
 
 for(i in files[51]){
-send_observation(file = i, 
-                 post = TRUE, 
-                 token = token)
+  send_observation(file = i, 
+                   post = TRUE, 
+                   token = token)
 }
