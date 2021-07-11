@@ -20,16 +20,26 @@ call_metadata <- function(file, verbose = TRUE){
   sp_tab <- species_table()
   sp_lookup <- sp_tab[[sp]]
   
-  if(verbose) cat('\tDone\n')
+  if(is.null(md$`Loc Position Lat`) | is.null(md$`Loc Position Lon`)){
+    
+    if(verbose) cat('\tNo Location - Skipped\n')
+    return(NULL)
+    
+  } else {
+    
+    if(verbose) cat('\tDone\n')
+    return(list(lat = md$`Loc Position Lat`,
+                long = md$`Loc Position Lon`,
+                sp = sp_lookup, 
+                model = md$Model, 
+                firmware = md$`Firmware Version`,
+                settings = md$`WA|Song Meter|Audio settings`,
+                sampling = md$Samplerate, 
+                date = formatted_date, 
+                time = formatted_time))  
+    
+  }
   
-  list(lat = md$`Loc Position Lat`,
-       long = md$`Loc Position Lon`,
-       sp = sp_lookup, 
-       model = md$Model, 
-       firmware = md$`Firmware Version`,
-       settings = md$`WA|Song Meter|Audio settings`,
-       sampling = md$Samplerate, 
-       date = formatted_date, 
-       time = formatted_time)
+  
   
 }

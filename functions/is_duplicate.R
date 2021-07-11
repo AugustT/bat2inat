@@ -25,6 +25,7 @@ is_duplicate <- function(md, radius = 10, username, verbose = TRUE){
                                 lng = md$long,
                                 radius = radius/1000,
                                 count_only = TRUE)
+  
   dupe <- ifelse(test = rtn$total_results > 0,
                  yes = TRUE,
                  no = FALSE)
@@ -32,7 +33,7 @@ is_duplicate <- function(md, radius = 10, username, verbose = TRUE){
   if(verbose){
     
     if(dupe){
-      cat('\tDuplicate - skipping\n\n')
+      cat('\tDuplicate online - skipping\n\n')
     } else {
       cat('\tUnique - proceeding\n')
     }

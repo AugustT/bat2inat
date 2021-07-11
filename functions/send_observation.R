@@ -3,12 +3,33 @@ send_observation <- function(file,
                              verbose = TRUE,
                              token,
                              post_duplicates = FALSE,
-                             radius = 10){
+                             radius = 10,
+                             log = NULL){
   
   if(verbose) cat(paste0('#', basename(file), '#\n'))
   
   # get metadata
   md <- call_metadata(file, verbose = verbose)
+  
+  if(is.null(md)){
+    
+    return(NULL)
+    
+  } else {
+    
+    # check against log
+    log_check <- log[log$sp == md$sp &
+                     log$lat == md$lat &
+                     log$long == md$long &
+                     log$date == md$date, ]
+
+    if(nrow(log_check) > 0){
+      
+      cat('\nDuplicate in this batch - skipping\n\n')
+    
+    }
+        
+  } 
   
   # Check we don't have a duplicate observation already
   dupe <- is_duplicate(md = md,
@@ -81,12 +102,14 @@ send_observation <- function(file,
     
     if(verbose) cat('\tDone\n\n')
     
-    return(response[[1]][['id']])
+    return(list(id = response[[1]][['id']],
+                md = md))
     
   } else {
     
     if(verbose) cat('\tSkipped\n\n')
-    return(NULL)
+    return(list(id = NULL,
+                md = md))
     
   }
 }

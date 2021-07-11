@@ -17,12 +17,4 @@ files
 
 load('token.rdata')
 
-for(i in files){
-  cat(paste0('\n', which(i == files), '/',
-             length(files), '\n'))
-
-  send_observation(file = i, 
-                   post = FALSE, 
-                   token = token)
-}
-cat('\nCOMPLETE')
+send_observations(files = files[1:5], post = TRUE, token = token)
