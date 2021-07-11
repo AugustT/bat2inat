@@ -26,7 +26,8 @@ send_observation <- function(file,
     if(nrow(log_check) > 0){
       
       cat('\nDuplicate in this batch - skipping\n\n')
-    
+      return(NULL)
+      
     }
         
   } 
