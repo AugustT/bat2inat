@@ -5,7 +5,7 @@ pynat <- import('pyinaturalist')
 
 # files <- file <- 'data/PIPPIP_20210526_221643.wav'
 
-files <- list.files(path = 'data/',#"C:\\Users\\tomaug\\OneDrive - UKCEH\\Bat audio - EM touch\\Woolley Grange - Bath - 2021",
+files <- list.files(path = 'C:\\Users\\t_a_a\\OneDrive - UKCEH\\Bat audio - EM touch\\West Barn/',
                     pattern = '.wav',
                     recursive = T,
                     full.names = T)
@@ -22,7 +22,7 @@ for(i in files){
              length(files), '\n'))
 
   send_observation(file = i, 
-                   post = TRUE, 
+                   post = FALSE, 
                    token = token)
 }
 cat('\nCOMPLETE')

@@ -4,14 +4,19 @@ filter_calls <- function(file, verbose = TRUE, plot = FALSE){
   
   # Create a temp dir for spectrograms  
   if(plot){
+    
     tempD <- tempdir()
+    
+    # Delete any that are already there
+    unlink(file.path(tempD, 'spectrograms'), recursive = TRUE)
+    unlink(list.files(tempD, pattern = '^spectrograms.+html$', full.names = TRUE))
+    
   } else {
+    
     tempD <- NULL
+    
   }
   
-  # Delete any that are already there
-  unlink(file.path(tempD, 'spectrograms'), recursive = TRUE)
-  unlink(list.files(tempD, pattern = '^spectrograms.+html$', full.names = TRUE))
   
   # Do call detection
   TD <- bioacoustics::threshold_detection(
