@@ -1,15 +1,28 @@
-send_observation <- function(file, post = TRUE, verbose = TRUE, token){
+send_observation <- function(file,
+                             post = TRUE,
+                             verbose = TRUE,
+                             token,
+                             post_duplicates = FALSE,
+                             radius = 10){
   
   if(verbose) cat(paste0('#', basename(file), '#\n'))
   
   # get metadata
-  md <- call_metadata(file)
+  md <- call_metadata(file, verbose = verbose)
+  
+  # Check we don't have a duplicate observation already
+  dupe <- is_duplicate(md = md,
+                       radius = 10,
+                       username = token$username)
+  
+  if(dupe) return(NULL)
   
   # filter calls
-  TD <- filter_calls(file)
+  TD <- filter_calls(file, verbose = verbose)
   
   # create spectrogram
-  png <- write_spectro(file, TD, samp_freq = md$sampling)
+  png <- write_spectro(file, TD, samp_freq = md$sampling,
+                       verbose = verbose)
   
   # browseURL(dirname(TD$filtered_calls_image))
   
