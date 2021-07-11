@@ -11,10 +11,6 @@ files <- list.files(path = 'C:\\Users\\t_a_a\\OneDrive - UKCEH\\Bat audio - EM t
                     full.names = T)
 files
 
-# ids <- lapply(X = files,
-#               FUN = send_observation,
-#               post = TRUE)
-
 load('token.rdata')
 
-send_observations(files = files[1:5], post = TRUE, token = token)
+send_observations(files = files, post = TRUE, token = token)

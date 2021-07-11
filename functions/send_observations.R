@@ -1,4 +1,4 @@
-send_observations <- function(files, post = TRUE, token){
+send_observations <- function(files, post = TRUE, token, parallel = FALSE){
   
   log <- data.frame(sp = NULL,
                     lat = NULL,
@@ -18,10 +18,11 @@ send_observations <- function(files, post = TRUE, token){
     if(!is.null(resp)){
     
       log <- rbind(log, 
-                   data.frame(sp = md$sp,
-                              lat = md$lat,
-                              long = md$long,
-                              date = md$date))
+                   data.frame(sp = resp$md$sp,
+                              lat = resp$md$lat,
+                              long = resp$md$long,
+                              date = resp$md$date))
+      print(log)
     }
   }
   
