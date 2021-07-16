@@ -1,7 +1,5 @@
-# md - metadata returned from call_metadata
-# radius - in meters, in which a record is considered a duplicate
-
-is_duplicate <- function(md, radius = 10, username, verbose = TRUE){
+is_duplicate <-
+function(md, radius = 10, username, verbose = TRUE){
   
   if(verbose) cat('Searching for duplicates')
   

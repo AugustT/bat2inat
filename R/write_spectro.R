@@ -1,4 +1,5 @@
-write_spectro <- function(file, TD = NULL, samp_freq = 256000, verbose = TRUE){
+write_spectro <-
+function(file, TD = NULL, samp_freq = 256000, verbose = TRUE){
 
   if(verbose) cat('Creating spectrogram')
   tf1 <- tempfile(fileext = '.png')

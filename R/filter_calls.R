@@ -1,4 +1,5 @@
-filter_calls <- function(file, verbose = TRUE, plot = FALSE){
+filter_calls <-
+function(file, verbose = TRUE, plot = FALSE){
 
   if(verbose) cat('Isolating calls')
   

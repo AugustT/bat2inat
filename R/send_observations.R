@@ -1,4 +1,5 @@
-send_observations <- function(files, post = TRUE, token, parallel = FALSE){
+send_observations <-
+function(files, post = TRUE, token, parallel = FALSE){
   
   log <- data.frame(sp = NULL,
                     lat = NULL,

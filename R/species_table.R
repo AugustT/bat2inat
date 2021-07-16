@@ -1,4 +1,5 @@
-species_table <- function(x){
+species_table <-
+function(x){
   
   list(BARBAR = 'Barbastella barbastellus',
        EPTSER = 'Eptesicus serotinus',

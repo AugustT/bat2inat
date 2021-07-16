@@ -1,4 +1,5 @@
-call_metadata <- function(file, verbose = TRUE){
+call_metadata <-
+function(file, verbose = TRUE){
   
   if(verbose) cat('Extracting call metadata')
   

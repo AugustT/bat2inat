@@ -1,4 +1,5 @@
-send_observation <- function(file,
+send_observation <-
+function(file,
                              post = TRUE,
                              verbose = TRUE,
                              token,

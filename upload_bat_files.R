@@ -13,4 +13,7 @@ files
 
 load('token.rdata')
 
-send_observations(files = files, post = TRUE, token = token)
+token$username <- 'bat2inat'
+token$password <- 'test123'
+
+send_observations(files = files[1], post = TRUE, token = token)
