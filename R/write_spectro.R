@@ -1,3 +1,4 @@
+#' @export
 write_spectro <-
 function(file, TD = NULL, samp_freq = 256000, verbose = TRUE){
 

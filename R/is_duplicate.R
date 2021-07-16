@@ -1,7 +1,11 @@
+#' @export
+#' @import reticulate
 is_duplicate <-
 function(md, radius = 10, username, verbose = TRUE){
   
   if(verbose) cat('Searching for duplicates')
+  
+  pynat <- import('pyinaturalist')
   
   # get proper name
   q <- pynat$search(q = md$sp, sources = 'taxa', per_page = 1)

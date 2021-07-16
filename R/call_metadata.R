@@ -1,3 +1,4 @@
+#' @export
 call_metadata <-
 function(file, verbose = TRUE){
   

@@ -4,6 +4,7 @@ Title: Upload bat acoutic recordings to iNaturalist
 Version: 0.1
 Date: 2021-07-16
 Author: Tom August
-Maintainer: Tom August
+Maintainer: Tom August <tomaug@ceh.ac.uk>
 Description: Upload those files... good times
 License: MIT
+RoxygenNote: 7.1.1

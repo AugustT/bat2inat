@@ -1,3 +1,4 @@
+#' @export
 filter_calls <-
 function(file, verbose = TRUE, plot = FALSE){
 

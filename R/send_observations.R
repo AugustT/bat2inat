@@ -1,3 +1,4 @@
+#' @export
 send_observations <-
 function(files, post = TRUE, token, parallel = FALSE){
   

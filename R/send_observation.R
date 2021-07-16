@@ -1,13 +1,17 @@
+#' @export
+#' @import reticulate
 send_observation <-
 function(file,
-                             post = TRUE,
-                             verbose = TRUE,
-                             token,
-                             post_duplicates = FALSE,
-                             radius = 10,
-                             log = NULL){
+         post = TRUE,
+         verbose = TRUE,
+         token,
+         post_duplicates = FALSE,
+         radius = 10,
+         log = NULL){
   
   if(verbose) cat(paste0('#', basename(file), '#\n'))
+  
+  pynat <- import('pyinaturalist')
   
   # get metadata
   md <- call_metadata(file, verbose = verbose)

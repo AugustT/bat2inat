@@ -1,7 +1,4 @@
-for(script in list.files('functions', full.names = T)) source(script)
-library(reticulate)
-
-pynat <- import('pyinaturalist')
+library(bat2inat)
 
 # files <- file <- 'data/PIPPIP_20210526_221643.wav'
 
@@ -16,4 +13,4 @@ load('token.rdata')
 token$username <- 'bat2inat'
 token$password <- 'test123'
 
-send_observations(files = files[1], post = TRUE, token = token)
+bat2inat::send_observations(files = files[4], post = TRUE, token = token)
