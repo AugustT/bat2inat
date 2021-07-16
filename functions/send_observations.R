@@ -22,7 +22,7 @@ send_observations <- function(files, post = TRUE, token, parallel = FALSE){
                               lat = resp$md$lat,
                               long = resp$md$long,
                               date = resp$md$date))
-      print(log)
+
     }
   }
   
