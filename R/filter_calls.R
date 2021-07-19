@@ -19,17 +19,27 @@ function(file, verbose = TRUE, plot = FALSE){
     
   }
   
-  
   # Do call detection
-  TD <- bioacoustics::threshold_detection(
-    threshold = 10,
-    file,
-    spectro_dir = tempD,
-    ticks = TRUE,
-    acoustic_feat = TRUE
-  )
+  suppressMessages({
+    TD <- bioacoustics::threshold_detection(
+      threshold = 10,
+      file,
+      spectro_dir = tempD,
+      ticks = TRUE,
+      acoustic_feat = TRUE
+    )  
+  })
   
-  if(verbose) cat('\t\t\tDone\n')
+  if(is.null(TD$data)){
+    
+    if(verbose) cat('\t\t\tNo calls found - Done\n')
+    
+  } else {
+  
+    if(verbose) cat('\t\t\tDone\n')
+    
+  }
+  
   if(plot){
     fp <- file.path(tempD, 'filtered_calls.png')
     if(verbose) cat(paste('Plotting', length(TD$data$event_data$freq_max_amp), 'calls'))
