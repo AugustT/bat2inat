@@ -22,12 +22,14 @@ function(file, verbose = TRUE, plot = FALSE){
   # Do call detection
   suppressMessages({
     TD <- bioacoustics::threshold_detection(
-      threshold = 10,
+      threshold = 14,
       file,
       spectro_dir = tempD,
       ticks = TRUE,
-      acoustic_feat = TRUE
-    )  
+      acoustic_feat = TRUE,
+      min_dur = 1.2,
+      min_TBE = 15,
+      max_TBE = 50000)
   })
   
   if(is.null(TD$data)){
