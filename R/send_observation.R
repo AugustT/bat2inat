@@ -70,11 +70,11 @@ function(file,
   } else {
     
     desc <- paste('Recorded on', md$model, md$firmware, '\n',
-                  'Number of calls in sequence:', length(TD$freq_peak), '\n',
-                  'Peak frequencies (kHz):', paste(round(TD$freq_peak/1000), collapse = ', '), '\n',
-                  'Max frequencies (kHz):', paste(round(TD$freq_max/1000), collapse = ', '), '\n',
-                  'Min frequencies (kHz):', paste(round(TD$freq_min/1000), collapse = ', '), '\n',
-                  'Call durations (ms):', paste(round(TD$call_duration, digits = 1), collapse = ', '), '\n',
+                  'Number of good quality calls:', length(TD$freq_peak), '\n',
+                  'Av. peak frequency (kHz):', round(median(TD$freq_peak/1000)), '\n',
+                  'Av. max frequency (kHz):', round(median(TD$freq_max/1000)), '\n',
+                  'Av. min frequency (kHz):', round(median(TD$freq_min/1000)), '\n',
+                  'Call durations (ms):', round(median(TD$call_duration), digits = 1), '\n',
                   'Recorder settings\n',
                   md$settings)
     

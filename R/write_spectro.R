@@ -1,9 +1,9 @@
 #' @export
 write_spectro <-
-function(file, TD = NULL, samp_freq = 256000, verbose = TRUE){
+function(file, TD = NULL, samp_freq = 256000, tempDir = tempdir(), verbose = TRUE){
 
   if(verbose) cat('Creating spectrogram')
-  tf1 <- tempfile(fileext = '.png')
+  tf1 <- tempfile(fileext = '.png', tmpdir = tempDir)
   suppressMessages({
     png(filename = tf1, width = 1024, height = 1024*0.75)
       fft_data <- av::read_audio_fft(file, window = av::hanning(1024), overlap = 0.5, )
@@ -25,7 +25,7 @@ function(file, TD = NULL, samp_freq = 256000, verbose = TRUE){
       bins <- sort(table(floor(s/bin_window)*bin_window), decreasing = TRUE)
       bins <- as.numeric(names(bins))
       
-      tf2 <- tempfile(fileext = '.png')
+      tf2 <- tempfile(fileext = '.png', tmpdir = tempDir)
       suppressMessages({
         png(filename = tf2, width = 1024, height = 1024*0.75)
         fft_data <- av::read_audio_fft(file,
