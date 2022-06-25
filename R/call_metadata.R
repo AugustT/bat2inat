@@ -6,9 +6,15 @@ function(file, verbose = TRUE){
   
   md <- bioacoustics:::guano_md(file)
   
-  formatted_date <- format(md$Timestamp, format = '%Y/%m/%d')
-  
-  formatted_time <- format(md$Timestamp, format = '%H:%M:%S')
+  fname <- gsub('.wav', '', md$`Original Filename`)
+  date <- strsplit(fname, '_')[[1]][1]
+  formatted_date <- paste0(substr(date,1,4), '/',
+                           substr(date,5,6), '/',
+                           substr(date,7,8))
+  time <- strsplit(fname, '_')[[1]][2]
+  formatted_time <- paste0(substr(time,1,2), ':',
+                           substr(time,3,4), ':',
+                           substr(time,5,6))
   
   sp <- ifelse(test = md$`Species Auto ID` == md$`Species Manual ID`,
                yes = md$`Species Auto ID`,
