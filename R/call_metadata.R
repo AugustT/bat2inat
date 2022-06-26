@@ -16,9 +16,26 @@ function(file, verbose = TRUE){
                            substr(time,3,4), ':',
                            substr(time,5,6))
   
-  sp <- ifelse(test = md$`Species Auto ID` == md$`Species Manual ID`,
-               yes = md$`Species Auto ID`,
-               no = md$`Species Manual ID`)
+  if('Species Auto ID' %in% names(md) & 
+     'Species Manual ID' %in% names(md)){
+    
+    sp <- ifelse(test = md$`Species Auto ID` == md$`Species Manual ID`,
+                 yes = md$`Species Auto ID`,
+                 no = md$`Species Manual ID`)
+    
+  } else if('Species Auto ID' %in% names(md)) {
+    
+    sp <- md$`Species Auto ID`
+    
+  } else if('Species Manual ID' %in% names(md)){
+    
+    sp <- md$`Species Manual ID`
+    
+  } else {
+    
+    sp <- strsplit(basename(file), '_')[[1]][1]
+    
+  }
   
   sp_tab <- species_table()
   sp_lookup <- sp_tab[[sp]]
