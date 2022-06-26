@@ -19,5 +19,8 @@ function(x){
        PLEAUR = 'Plecotus auritus',
        PLEAUS = 'Plecotus austriacus',
        RHIFER = 'Rhinolophus ferrumequinum',
-       RHIHIP = 'Rhinolophus hipposideros')
+       RHIHIP = 'Rhinolophus hipposideros',
+       EPTFUS = 'Eptesicus fuscus',
+       LASBOR = 'Lasiurus borealis',
+       MYOLUC = 'Myotis lucifugus')
 }
