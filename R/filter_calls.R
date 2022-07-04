@@ -27,7 +27,7 @@ function(file, verbose = TRUE,
       TD <- bioacoustics::threshold_detection(
         threshold = 14,
         file,
-        spectro_dir = getwd(),
+        spectro_dir = NULL,
         # spectro_dir = tempD,
         ticks = TRUE,
         acoustic_feat = TRUE,
