@@ -1,6 +1,6 @@
 #' @export
 call_metadata <-
-function(file, verbose = TRUE){
+function(file, name = NULL, verbose = TRUE){
   
   if(verbose) cat('Extracting call metadata')
   
@@ -33,7 +33,8 @@ function(file, verbose = TRUE){
     
   } else {
     
-    sp <- strsplit(basename(file), '_')[[1]][1]
+    if(is.null(name)) name <- basename(file)
+    sp <- strsplit(name, '_')[[1]][1]
     
   }
   

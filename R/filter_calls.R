@@ -1,6 +1,7 @@
 #' @export
 filter_calls <-
-function(file, verbose = TRUE, plot = FALSE){
+function(file, verbose = TRUE,
+         plot = FALSE, method = 'threshold'){
 
   if(verbose) cat('Isolating calls')
   
@@ -19,18 +20,39 @@ function(file, verbose = TRUE, plot = FALSE){
     
   }
   
-  # Do call detection
-  suppressMessages({
-    TD <- bioacoustics::threshold_detection(
-      threshold = 14,
-      file,
-      spectro_dir = tempD,
-      ticks = TRUE,
-      acoustic_feat = TRUE,
-      min_dur = 1.2,
-      min_TBE = 15,
-      max_TBE = 50000)
-  })
+  if(method == 'threshold'){
+  
+    # Do call detection
+    suppressMessages({
+      TD <- bioacoustics::threshold_detection(
+        threshold = 14,
+        file,
+        spectro_dir = getwd(),
+        # spectro_dir = tempD,
+        ticks = TRUE,
+        acoustic_feat = TRUE,
+        min_dur = 1.2,
+        min_TBE = 15,
+        max_TBE = 50000)
+    })
+    
+  } else {
+    
+    # Blob detection gives some pretty off results
+    # it finds the calls but the frequencies are off
+    # suppressMessages({
+    #   TD <- bioacoustics::blob_detection(
+    #     file,
+    #     min_dur = 1.2, 
+    #     min_TBE = 15, 
+    #     max_TBE = 50000,
+    #     contrast_boost = 30, 
+    #     bg_substract = 30,
+    #     spectro_dir = getwd(),
+    #     ticks = FALSE)
+    # })
+    
+  }
   
   if(is.null(TD$data)){
     
