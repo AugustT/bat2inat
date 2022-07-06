@@ -1,23 +1,42 @@
 #' @export
 call_metadata <-
-function(file, verbose = TRUE){
+function(file, name = NULL, verbose = TRUE){
   
   if(verbose) cat('Extracting call metadata')
   
   md <- bioacoustics:::guano_md(file)
   
-  date <- strsplit(md$`Original Filename`, '_')[[1]][1]
+  fname <- gsub('.wav', '', md$`Original Filename`)
+  date <- strsplit(fname, '_')[[1]][1]
   formatted_date <- paste0(substr(date,1,4), '/',
                            substr(date,5,6), '/',
                            substr(date,7,8))
-  time <- strsplit(md$`Original Filename`, '_')[[1]][2]
+  time <- strsplit(fname, '_')[[1]][2]
   formatted_time <- paste0(substr(time,1,2), ':',
                            substr(time,3,4), ':',
                            substr(time,5,6))
   
-  sp <- ifelse(test = md$`Species Auto ID` == md$`Species Manual ID`,
-               yes = md$`Species Auto ID`,
-               no = md$`Species Manual ID`)
+  if('Species Auto ID' %in% names(md) & 
+     'Species Manual ID' %in% names(md)){
+    
+    sp <- ifelse(test = md$`Species Auto ID` == md$`Species Manual ID`,
+                 yes = md$`Species Auto ID`,
+                 no = md$`Species Manual ID`)
+    
+  } else if('Species Auto ID' %in% names(md)) {
+    
+    sp <- md$`Species Auto ID`
+    
+  } else if('Species Manual ID' %in% names(md)){
+    
+    sp <- md$`Species Manual ID`
+    
+  } else {
+    
+    if(is.null(name)) name <- basename(file)
+    sp <- strsplit(name, '_')[[1]][1]
+    
+  }
   
   sp_tab <- species_table()
   sp_lookup <- sp_tab[[sp]]

@@ -1,6 +1,6 @@
 #' @export
 send_observations <-
-function(files, post = TRUE, token, parallel = FALSE){
+function(files, post = TRUE, token, parallel = FALSE, radius = 10){
   
   log <- data.frame(sp = NULL,
                     lat = NULL,
@@ -15,7 +15,8 @@ function(files, post = TRUE, token, parallel = FALSE){
     resp <- send_observation(file = i, 
                              post = post, 
                              token = token,
-                             log = log)
+                             log = log,
+                             radius = radius)
     
     if(!is.null(resp)){
     

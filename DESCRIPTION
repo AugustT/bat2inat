@@ -6,7 +6,11 @@ Date: 2021-07-16
 Author: Tom August
 Maintainer: Tom August <tomaug@ceh.ac.uk>
 Description: Upload those files... good times
-Imports:
-  reticulate
+Depends:
+  reticulate,
+  bioacoustics,
+  av,
+  geosphere,
+  soundgen
 License: MIT
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.0

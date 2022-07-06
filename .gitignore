@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 token.rdata
+spectrograms/
+spectrogram*
