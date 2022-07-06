@@ -1,6 +1,6 @@
 library(bat2inat)
 
-files <- list.files(path = 'C:\\Users\\t_a_a\\OneDrive - UKCEH\\Bat audio - EM touch\\Cholsey marsh - 19_07_21/',
+files <- list.files(path = file.path(find.package('bat2inat'), 'data'),
                     pattern = '.wav',
                     recursive = T,
                     full.names = T)
@@ -9,7 +9,9 @@ files
 load('token.rdata')
 
 # Test account
-# token$username <- 'bat2inat'
-# token$password <- 'test123'
+token$username <- 'bat2inat'
+token$password <- 'test123'
 
-bat2inat::send_observations(files = files, post = FALSE, token = token)
+bat2inat::send_observations(files = files[1],
+                            post = FALSE, 
+                            token = token)
