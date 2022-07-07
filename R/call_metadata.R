@@ -14,8 +14,8 @@ function(file, name = NULL, verbose = TRUE){
   } else {
     
     fname <- gsub('.wav', '', md$`Original Filename`)
-    sp_fname <- strsplit(fname, '_')
-    date <- sp_fname[[1]][length(sp_fname)-1]
+    sp_fname <- strsplit(fname, '_')[[1]]
+    date <- sp_fname[length(sp_fname)-1]
     
     formatted_date <- paste0(substr(date,1,4), '/',
                              substr(date,5,6), '/',
@@ -25,18 +25,32 @@ function(file, name = NULL, verbose = TRUE){
                              substr(time,3,4), ':',
                              substr(time,5,6))
     
-    if('Species Auto ID' %in% names(md) & 
-       'Species Manual ID' %in% names(md)){
+    auto_present <- FALSE
+    man_present <- FALSE
+    
+    if('Species Auto ID' %in% names(md)){
+      if(!is.na(md$`Species Auto ID`)){
+        auto_present <- TRUE
+      }
+    }
+    
+    if('Species Manual ID' %in% names(md)){
+      if(!is.na(md$`Species Manual ID`)){
+        man_present <- TRUE
+      }
+    }
+    
+    if(auto_present & man_present){
       
       sp <- ifelse(test = md$`Species Auto ID` == md$`Species Manual ID`,
                    yes = md$`Species Auto ID`,
                    no = md$`Species Manual ID`)
       
-    } else if('Species Auto ID' %in% names(md)) {
+    } else if(auto_present) {
       
       sp <- md$`Species Auto ID`
       
-    } else if('Species Manual ID' %in% names(md)){
+    } else if(man_present){
       
       sp <- md$`Species Manual ID`
       
