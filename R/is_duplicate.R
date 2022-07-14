@@ -28,6 +28,8 @@ function(md, radius = 10, username, verbose = TRUE){
                                 radius = radius/1000,
                                 count_only = TRUE)
   
+  if(verbose) cat('Dupe returns:'); print(str(rtn))
+  
   dupe <- ifelse(test = rtn$total_results > 0,
                  yes = TRUE,
                  no = FALSE)
