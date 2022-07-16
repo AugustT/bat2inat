@@ -6,7 +6,7 @@ function(file, TD = NULL, samp_freq = 256000, tempDir = tempdir(), verbose = TRU
   tf1 <- tempfile(fileext = '.png', tmpdir = tempDir)
   suppressMessages({
     png(filename = tf1, width = 1024, height = 1024*0.75)
-      fft_data <- av::read_audio_fft(file, window = av::hanning(4096), overlap = 0.2)
+      fft_data <- av::read_audio_fft(file, window = av::hanning(2048), overlap = 0.2)
       plot(fft_data,
            main = 'Spectrogram of full sequence')
     dev.off()
