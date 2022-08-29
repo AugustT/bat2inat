@@ -10,7 +10,8 @@ function(file, TD = NULL, samp_freq = 256000, tempDir = tempdir(), verbose = TRU
       av_plot(fft_data, 
               hline = seq(10, 120, 10),
               yaxp = c(0,120,12),
-              legend = 'Full sequence')
+              legend = 'Full sequence',
+              ylim = c(0,120))
     dev.off()
     fnames <- tf1
   })

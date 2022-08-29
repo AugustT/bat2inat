@@ -1,5 +1,5 @@
 av_plot <- function (x, y, dark = TRUE, legend = '', keep.par = FALSE, 
-          useRaster = TRUE, vline = FALSE, hline = NULL, ...) 
+          useRaster = TRUE, vline = FALSE, hline = NULL, ylim = c(0,120), ...) 
 {
   if (!isTRUE(keep.par)) {
     oldpar <- par(no.readonly = TRUE)
@@ -22,7 +22,8 @@ av_plot <- function (x, y, dark = TRUE, legend = '', keep.par = FALSE,
   }
   par(mar = c(5, 5, 3, 3), mex = 0.6)
   image(attr(x, "time"), attr(x, "frequency")/1000, 
-        t(x), xlab = "TIME", ylab = "FREQUENCY (kHZ)", 
+        t(x), xlab = "TIME", ylab = "FREQUENCY (kHZ)",
+        ylim = ylim, 
         col = col, useRaster = useRaster, ...)
   if (legend!='') {
     legend("topright", legend = legend, pch = "", 
