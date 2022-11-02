@@ -19,6 +19,11 @@ function(file,
   # get metadata
   md <- call_metadata(file, verbose = verbose)
   
+  # if no species is given assign it to 'Chiroptera'
+  if(length(md$sp) == 0){
+    md$sp <- "Chiroptera"
+  }
+  
   if(is.null(md)){
     
     return(NULL)
