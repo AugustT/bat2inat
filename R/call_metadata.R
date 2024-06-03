@@ -61,7 +61,7 @@ function(file, name = NULL, verbose = TRUE, sp_tab = species_table()){
       
     }
     
-    sp_lookup <- sp_tab$latin_name[sp_tab$abbreviation == sp]
+    sp_lookup <- sp_tab$latin_name[sp_tab$abbreviation == toupper(sp)]
     
     if(is.null(md$`Loc Position Lat`) | is.null(md$`Loc Position Lon`)){
       
